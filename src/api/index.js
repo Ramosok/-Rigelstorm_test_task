@@ -1,0 +1,43 @@
+const baseUrl = 'http://api.weatherapi.com/v1/current.json';
+const apiKey = '7096aeed0ceb4a85993134438210711';
+
+export const sendRequest = async (
+    query,
+    method = 'GET',
+    body = {},
+    headers = {},
+) => {
+    const requestUrl = `${baseUrl}?key=${apiKey}&q=${query}`;
+    const options = {
+        method,
+        mode: 'cors',
+        headers: {
+            ...headers,
+        }
+    };
+
+    if (method === 'POST' || method === 'PUT') {
+        options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(requestUrl, options);
+
+    const contentType = response.headers.get('Content-Type');
+
+    if (contentType === 'application/json') {
+
+        return await response.json();
+    }
+
+    throw new Error('Unexpected content type');
+};
+
+export const generateQueryString = (data = {}) => {
+    let query = '';
+
+    Object.keys(data).forEach(key => {
+        query += `${data[key]}`;
+    });
+
+    return query;
+}
