@@ -1,0 +1,7 @@
+.weather__card {
+    width: 40%;
+    height: 30%;
+    border:3px solid;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
