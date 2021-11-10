@@ -1,3 +1,15 @@
+*{
+  margin: 0 auto;
+  padding: 0;
+}
+body{
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+}
+
 .main {
-  background: aquamarine ;
+  width: 1280px;
+  height: 100vh;
+  background: url(https://apostrophe.ua/uploads/image/8c4820d399ca6620e3141cff8e320f83.jpg) center no-repeat;
+  display: flex;
+  align-items: center;
 }
