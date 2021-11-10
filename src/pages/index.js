@@ -32,10 +32,11 @@ const IndexPage = () => {
     ];
 
     const [weatherData, setWeatherData] = useState(null);
-    const [city, setCity] = useState('Minsk');
+    const [city, setCity] = useState(sessionStorage.getItem('city') ? sessionStorage.getItem('city') :'Minsk');
 
     function changingTheCity(event) {
         setCity(event.target.name)
+        sessionStorage.setItem('city', event.target.name);
     }
 
     const fetchWeather = useCallback(async () => {
