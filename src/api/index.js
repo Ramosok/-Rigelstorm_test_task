@@ -1,13 +1,17 @@
-const baseUrl = 'http://api.weatherapi.com/v1/current.json';
+//Эти данные по хорошему должны быть в .env файле, но для тестового задания я поместил их сюда.
+const baseUrl = 'http://api.weatherapi.com/v1';
 const apiKey = '7096aeed0ceb4a85993134438210711';
 
 export const sendRequest = async (
+    path,
     query,
+    days,
+    quantity,
     method = 'GET',
     body = {},
     headers = {},
 ) => {
-    const requestUrl = `${baseUrl}?key=${apiKey}&q=${query}`;
+    const requestUrl = `${baseUrl}${path}?key=${apiKey}&q=${query}&${days}=${quantity}`;
     const options = {
         method,
         mode: 'cors',

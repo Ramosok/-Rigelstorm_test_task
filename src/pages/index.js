@@ -54,7 +54,7 @@ const IndexPage = () => {
     }, [fetchWeather])
 
     if (!weatherData) {
-        return <h2 className="page-title">Loading...</h2>;
+        return <h1 className="page-title">Loading...</h1>;
     }
 
     return (
@@ -63,17 +63,21 @@ const IndexPage = () => {
                 <meta charSet="utf-8"/>
                 <title>Weather</title>
             </Helmet>
-            <WeatherCard weatherData={weatherData}/>
+            <WeatherCard
+                weatherData={weatherData}
+                city={city}
+            />
+            <div className="button__container">
             {arrCity.map(button =>
                 <Button
                     key={button.id}
                     changingTheCity={changingTheCity}
-                    //id={button.id}
                     city={button.city}
                     id={button.id}
                     title={button.title}
                 />)
             }
+            </div>
             {/* <div><Link to="/app">Catalog</Link></div>
             <div><Link to="/proFile">ProFile</Link></div>*/}
         </main>

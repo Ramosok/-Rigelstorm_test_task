@@ -1,8 +1,9 @@
 .weather__card {
     width: 70%;
-    height: 50%;
+    height: 300px;
     border: 3px solid;
     border-radius: 20px;
     box-sizing: border-box;
     padding: 20px;
+    display: flex;
 }

@@ -3,7 +3,7 @@ import {generateQueryString, sendRequest} from './index';
 export const getCurrentWeather = data => {
     const queryString = generateQueryString(data);
 
-    return sendRequest( queryString);
+    return sendRequest( '/forecast.json',queryString,'days', 3);
 };
 
 
