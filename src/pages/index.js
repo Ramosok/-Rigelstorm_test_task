@@ -1,14 +1,14 @@
 //libraries
 import React, {useCallback, useEffect, useState} from "react"
 import {Helmet} from "react-helmet"
-import {Link} from "gatsby";
-//component
-import WeatherCard from "./components/WeatherCard";
-import Button from "./components/Button";
 //api
 import {getCurrentWeather} from "../api/weather";
+//page
+import WeatherPage from "./WeatherPage";
 // styles
 import './index.css';
+import Search from "./components/Search";
+import {Link} from "gatsby";
 
 
 // markup
@@ -32,9 +32,10 @@ const IndexPage = () => {
     ];
 
     const [weatherData, setWeatherData] = useState(null);
-    const [city, setCity] = useState(sessionStorage.getItem('city') ? sessionStorage.getItem('city') :'Minsk');
+    const [city, setCity] = useState(sessionStorage.getItem('city') ?
+        sessionStorage.getItem('city') : 'Minsk');
 
-    function changingTheCity(event) {
+    const changingTheCity = (event) => {
         setCity(event.target.name)
         sessionStorage.setItem('city', event.target.name);
     }
@@ -63,23 +64,16 @@ const IndexPage = () => {
                 <meta charSet="utf-8"/>
                 <title>Weather</title>
             </Helmet>
-            <WeatherCard
+
+            <WeatherPage
                 weatherData={weatherData}
                 city={city}
+                arrCity={arrCity}
+                changingTheCity={changingTheCity}
             />
-            <div className="button__container">
-            {arrCity.map(button =>
-                <Button
-                    key={button.id}
-                    changingTheCity={changingTheCity}
-                    city={button.city}
-                    id={button.id}
-                    title={button.title}
-                />)
-            }
-            </div>
-            {/* <div><Link to="/app">Catalog</Link></div>
-            <div><Link to="/proFile">ProFile</Link></div>*/}
+            <Link className="link" to="/WeatherExtendedPage"
+                  state={{weatherData: weatherData,city: city}}
+            >WeatherExtendedPage</Link>
         </main>
     )
 }

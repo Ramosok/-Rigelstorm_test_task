@@ -7,15 +7,10 @@ export const getCurrentWeather = data => {
 };
 
 
-/*
-export const getForecastWeather = data => {
+
+/*export const getForecastWeather = data => {
     const queryString = generateQueryString(data);
 
-    return sendRequest('/forecast', queryString);
-};
-
-export const getHistoricalWeather = data => {
-    const queryString = generateQueryString(data);
-
-    return sendRequest('/historical', queryString);
+    return sendRequest('/forecast.json',queryString,'days', 10);
 };*/
+
