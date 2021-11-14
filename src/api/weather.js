@@ -7,7 +7,7 @@ export const getCurrentWeather = data => {
 };
 
 
-
+//Тут метод для получение прогноза погоды на 10 дней, но к сожалению в API возвращает только 3. хотя в доках было что 10 можно запрасить.
 /*export const getForecastWeather = data => {
     const queryString = generateQueryString(data);
 

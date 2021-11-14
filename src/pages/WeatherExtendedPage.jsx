@@ -1,28 +1,39 @@
 //libraries
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "gatsby";
+import {navigate, useLocation} from '@reach/router';
+import {Helmet} from "react-helmet";
 //component
 import WeatherCard from "./components/WeatherCard";
 import Search from "./components/Search";
-import {Helmet} from "react-helmet";
-import {useLocation} from "@reach/router";
 
 
 const WeatherExtendedPage = ({location}) => {
+/*
     const path = useLocation();
-    const isPath = path.pathname === '/WeatherExtendedPage';
-    const [inputCity, setInputCity] = useState(sessionStorage.getItem('city') ?
-        sessionStorage.getItem('city') : 'Minsk');
+    const isPathW = path.pathname;
 
-    function searchTheCity(event) {
-        sessionStorage.setItem('city', event.target.value);
-        setInputCity(event.target.value);
-    }
+    const [inputCity, setInputCity] = useState(location.search);
+console.log(location.search)
+    location.state.isPath = isPathW
+*/
 
+    const searchTheCity = (event) => {
+        event.preventDefault()
+        //setInputCity(event.target.search.value);
+        sessionStorage.setItem('city', event.target.search.value);
+
+        navigate(
+            `?city=${event.target.search.value}`,
+            {replace: true}
+        );
+    };
+    console.log(location.state);
 
     if (!location) {
         return <h1 className="page-title">Loading...</h1>;
     }
+    ;
     return (
         <div>
             <Helmet>
@@ -34,7 +45,7 @@ const WeatherExtendedPage = ({location}) => {
             />
             <WeatherCard
                 weatherData={location.state.weatherData}
-                city={isPath ? inputCity : location.state.city}
+                city={sessionStorage.getItem('city') ? sessionStorage.getItem('city') : location.state.city}
             />
             <Link className="link" to="/">Back</Link>
         </div>

@@ -1,14 +1,14 @@
 //libraries
 import React, {useCallback, useEffect, useState} from "react"
 import {Helmet} from "react-helmet"
+import {Link} from "gatsby";
 //api
 import {getCurrentWeather} from "../api/weather";
 //page
 import WeatherPage from "./WeatherPage";
 // styles
 import './index.css';
-import Search from "./components/Search";
-import {Link} from "gatsby";
+import {useLocation} from "@reach/router";
 
 
 // markup
@@ -30,6 +30,8 @@ const IndexPage = () => {
             title: 'Братислава'
         }
     ];
+    //const path = useLocation();
+    //const isPath = path.pathname;
 
     const [weatherData, setWeatherData] = useState(null);
     const [city, setCity] = useState(sessionStorage.getItem('city') ?
@@ -38,6 +40,7 @@ const IndexPage = () => {
     const changingTheCity = (event) => {
         setCity(event.target.name)
         sessionStorage.setItem('city', event.target.name);
+
     }
 
     const fetchWeather = useCallback(async () => {
@@ -52,12 +55,11 @@ const IndexPage = () => {
     }, [city]);
     useEffect(() => {
         fetchWeather();
-    }, [fetchWeather])
+    }, [fetchWeather, city])
 
     if (!weatherData) {
         return <h1 className="page-title">Loading...</h1>;
     }
-
     return (
         <main className="main">
             <Helmet>
@@ -72,8 +74,8 @@ const IndexPage = () => {
                 changingTheCity={changingTheCity}
             />
             <Link className="link" to="/WeatherExtendedPage"
-                  state={{weatherData: weatherData,city: city}}
-            >WeatherExtendedPage</Link>
+                  state={{weatherData: weatherData, city: city}}
+            >Weather extended</Link>
         </main>
     )
 }

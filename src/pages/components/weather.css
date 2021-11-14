@@ -18,3 +18,9 @@
     text-shadow: 3px 3px 2px  black;
 
 }
+.search {
+    display: flex;
+}
+.temp{
+    margin:0 10px;
+}

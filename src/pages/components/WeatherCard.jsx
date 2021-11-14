@@ -2,16 +2,15 @@
 import React from 'react';
 import {useLocation} from "@reach/router";
 //helpers
-import {FormatDate} from "../../helpers";
+import {FormatDate, FormatTime} from "../../helpers";
 // styles
 import './weather.css';
 
 
+const WeatherCard = ({weatherData, city}) => {
 
-
-const WeatherCard = ({weatherData,city}) => {
     const path = useLocation();
-    const isPath = path.pathname === '/WeatherExtendedPage';
+    const isPath = path.pathname.includes('WeatherExtendedPage');
     const {forecast} = weatherData || [];
     const [arrForecastDay] = Object.values(forecast) || [];
 
@@ -26,7 +25,10 @@ const WeatherCard = ({weatherData,city}) => {
                     <div>Temperature:{cardDay.day.avgtemp_c}°C</div>
                     <div>Avghumidity: {cardDay.day.avghumidity}</div>
                     <div>{cardDay.day.condition.text}</div>
-                    {isPath && (cardDay.hour.map(hour => <div key={hour.time}>{hour.time}</div>))}
+                    {isPath && (cardDay.hour.map(hour =>
+                        <div key={hour.time}>{FormatTime(hour.time)}
+                            <span className="temp">Temperature:</span>
+                            <span>{hour.temp_c}</span></div>))}
                 </div>)}
         </div>
     );
