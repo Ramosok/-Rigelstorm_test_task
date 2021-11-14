@@ -6,7 +6,8 @@ import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
 
 
-const WeatherPage = ({weatherData,city,changingTheCity,arrCity}) => {
+const WeatherPage = ({weatherData, city, changingTheCity, arrCity}) => {
+
     return (
         <div>
             <Helmet>

@@ -2,6 +2,7 @@
 import React from 'react';
 // styles
 import './weather.css';
+
 const Search = ({searchTheCity}) => {
 
     return (

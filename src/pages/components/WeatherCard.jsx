@@ -8,11 +8,14 @@ import './weather.css';
 
 
 const WeatherCard = ({weatherData, city}) => {
-
     const path = useLocation();
     const isPath = path.pathname.includes('WeatherExtendedPage');
+
     const {forecast} = weatherData || [];
-    const [arrForecastDay] = Object.values(forecast) || [];
+    if (!forecast) {
+        return <h1 className="page-title">this information is not available...</h1>;
+    };
+    const [arrForecastDay] = Object.values(forecast) || {};
 
     return (
         <div className="weather__card"><h1 className="weather__card__title">{city}</h1>

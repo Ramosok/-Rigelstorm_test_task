@@ -1,7 +1,7 @@
 //libraries
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from "gatsby";
-import {navigate, useLocation} from '@reach/router';
+import {navigate} from '@reach/router';
 import {Helmet} from "react-helmet";
 //component
 import WeatherCard from "./components/WeatherCard";
@@ -9,31 +9,25 @@ import Search from "./components/Search";
 
 
 const WeatherExtendedPage = ({location}) => {
-/*
-    const path = useLocation();
-    const isPathW = path.pathname;
+    const {state} = location
+    const {weatherData} = state
 
-    const [inputCity, setInputCity] = useState(location.search);
-console.log(location.search)
-    location.state.isPath = isPathW
-*/
+    const params = new URLSearchParams(location.search);
+    const city = params.get("city");
 
-    const searchTheCity = (event) => {
+    const searchTheCity = (event,city) => {
         event.preventDefault()
-        //setInputCity(event.target.search.value);
-        sessionStorage.setItem('city', event.target.search.value);
+        sessionStorage.setItem('city', city);
 
         navigate(
             `?city=${event.target.search.value}`,
-            {replace: true}
+            {replace: true},
         );
     };
-    console.log(location.state);
 
     if (!location) {
         return <h1 className="page-title">Loading...</h1>;
-    }
-    ;
+    };
     return (
         <div>
             <Helmet>
@@ -44,8 +38,8 @@ console.log(location.search)
                 searchTheCity={searchTheCity}
             />
             <WeatherCard
-                weatherData={location.state.weatherData}
-                city={sessionStorage.getItem('city') ? sessionStorage.getItem('city') : location.state.city}
+                weatherData={weatherData}
+                city={location.state.city}
             />
             <Link className="link" to="/">Back</Link>
         </div>

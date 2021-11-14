@@ -2,17 +2,20 @@
 import React, {useCallback, useEffect, useState} from "react"
 import {Helmet} from "react-helmet"
 import {Link} from "gatsby";
+import {navigate} from "@reach/router";
 //api
 import {getCurrentWeather} from "../api/weather";
 //page
 import WeatherPage from "./WeatherPage";
 // styles
 import './index.css';
-import {useLocation} from "@reach/router";
+
 
 
 // markup
 const IndexPage = () => {
+
+
     const arrCity = [
         {
             id: 1,
@@ -40,7 +43,13 @@ const IndexPage = () => {
     const changingTheCity = (event) => {
         setCity(event.target.name)
         sessionStorage.setItem('city', event.target.name);
-
+        navigate(
+            `?city=${city ? sessionStorage.getItem('city') : city}`,
+            {replace: true},
+            {
+                state: {weatherData: weatherData}
+            },
+        );
     }
 
     const fetchWeather = useCallback(async () => {
@@ -55,7 +64,8 @@ const IndexPage = () => {
     }, [city]);
     useEffect(() => {
         fetchWeather();
-    }, [fetchWeather, city])
+    }, [fetchWeather, city]);
+
 
     if (!weatherData) {
         return <h1 className="page-title">Loading...</h1>;
