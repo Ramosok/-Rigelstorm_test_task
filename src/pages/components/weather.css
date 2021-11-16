@@ -1,0 +1,26 @@
+.weather__card {
+    width: 90%;
+    height: auto;
+    border: 3px solid;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+}
+.card__container {
+    font-size: 3vh;
+}
+.weather__card__title {
+    padding: 20px;
+    font-weight: bold;
+    color: #f1ed08;
+    mix-blend-mode: darken;
+    text-shadow: 3px 3px 2px  black;
+
+}
+.search {
+    display: flex;
+}
+.temp{
+    margin:0 10px;
+}
